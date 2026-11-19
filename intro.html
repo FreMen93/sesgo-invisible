@@ -68,6 +68,17 @@ figcaption{color:var(--mut);font-size:.88rem;margin-top:8px}
 @keyframes fl{50%{transform:translateY(-8px)}}
 .rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
 .rv.in{opacity:1;transform:none}
+/* secretos que solo la lupa revela */
+.cur-only{display:none}
+.cur .cur-only{display:block}
+.cur .secret{position:relative;border:1.5px dashed #ffd37a99;border-radius:14px;padding:12px 14px;margin:12px 0}
+.cur .secret::before{content:"🔍 pasa la lupa";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:.85rem;font-weight:700;color:#ffd37a;opacity:.75;pointer-events:none;white-space:nowrap}
+.cur .secret.seen::before{display:none}
+.cur .secret>.sc{-webkit-mask-image:radial-gradient(circle 74px at var(--x,-999px) var(--y,-999px),#000 55%,transparent 100%);mask-image:radial-gradient(circle 74px at var(--x,-999px) var(--y,-999px),#000 55%,transparent 100%)}
+.cur .secret.seen{border-style:solid;border-color:#35c98d88}
+.say .sc{padding:0;border:0;background:none}
+.secret .sc>p:first-child{margin-top:0}.secret .sc>p:last-child{margin-bottom:0}
+#found{margin:10px auto 0;font-weight:700;color:#ffd37a}
 /* música */
 #mus{position:fixed;right:14px;bottom:14px;z-index:90;font:inherit;font-weight:700;border:1px solid var(--bd);border-radius:999px;padding:10px 18px;color:#fff;background:#2a1650ee;cursor:pointer;backdrop-filter:blur(6px)}
 #mus.on{background:linear-gradient(135deg,var(--gr),#35c98d)}
@@ -97,6 +108,7 @@ figcaption{color:var(--mut);font-size:.88rem;margin-top:8px}
     <p class="lead">Las decisiones laborales que parecen neutrales, pero esconden prejuicios. Aquí aprendes qué son, cómo reconocerlos y qué hacer, antes de empezar las actividades.</p>
     <a class="btn" href="#actividades">Ver qué vas a hacer</a>
     <a class="btn ghost" href="index.html">▶ Ir directo a las actividades</a>
+    <p class="cur-only" id="found" style="text-align:center">🔍 La lupa revela mensajes ocultos en esta página. Encontrados: <span id="fc">0</span>/5</p>
     <figure class="heroimg float"><span class="ph"><img src="img/hero.jpg" alt="Una balanza con símbolos de mujer y hombre, dos profesionales, monedas apiladas a distinta altura y una mujer haciendo gesto de alto" data-zoom></span></figure>
   </div>
 </header>
@@ -123,9 +135,9 @@ figcaption{color:var(--mut);font-size:.88rem;margin-top:8px}
   </div>
   <div class="say">
     <div class="a"><span class="tag r">Lo que se dice</span><br>«No es el perfil que buscamos.»<br>«Preferimos a alguien con más disponibilidad.»</div>
-    <div class="b"><span class="tag g">Lo que puede haber debajo</span><br>«Es mujer y tal vez tenga hijos.»<br>«Es muy joven / muy mayor para este cargo.»</div>
+    <div class="b secret" data-s="1"><div class="sc"><span class="tag g">Lo que puede haber debajo</span><br>«Es mujer y tal vez tenga hijos.»<br>«Es muy joven / muy mayor para este cargo.»</div></div>
   </div>
-  <p class="note">Importante: el sesgo no siempre es mala intención. Muchas veces la persona que decide ni siquiera es consciente de que lo hace; por eso hay que aprender a detectarlo.</p>
+  <div class="secret" data-s="2"><p class="note sc">Importante: el sesgo no siempre es mala intención. Muchas veces la persona que decide ni siquiera es consciente de que lo hace; por eso hay que aprender a detectarlo.</p></div>
 </section>
 
 <section id="como">
@@ -151,7 +163,7 @@ figcaption{color:var(--mut);font-size:.88rem;margin-top:8px}
     <div class="panel"><h3>⭐ Evaluación</h3><p>Valorar distinto el mismo desempeño según quién lo realiza.</p></div>
     <div class="panel"><h3>🎓 Capacitación</h3><p>No invitar a formaciones a quien «se va a ausentar» o «pronto se jubila».</p></div>
     <div class="panel"><h3>📈 Ascensos</h3><p>Asumir que alguien «no aceptará el cargo» sin preguntarle.</p></div>
-    <div class="panel"><h3>🧩 Características</h3><p>Género, maternidad, edad, apariencia, estado civil, origen: ninguna debería definir el valor de una persona trabajadora.</p></div>
+    <div class="panel secret" data-s="3"><div class="sc"><h3>🧩 Características</h3><p>Género, maternidad, edad, apariencia, estado civil, origen: ninguna debería definir el valor de una persona trabajadora.</p></div></div>
   </div>
   <figure><span class="ph"><img src="img/filas.jpg" alt="Una lupa sobre figuras en bloques de madera, entre las que se elige una" data-zoom></span><figcaption>Quien selecciona puede, sin notarlo, filtrar por características y no por capacidades.</figcaption></figure>
 </section>
@@ -176,11 +188,9 @@ figcaption{color:var(--mut);font-size:.88rem;margin-top:8px}
     <p>Después de las entrevistas, el jefe de selección escribió en su informe: <i>«Ambos cumplen. Pero Camila tiene dos hijos pequeños; seguramente se ausentará con frecuencia. Andrés ofrece más disponibilidad.»</i></p>
     <div class="quote">Nadie le preguntó a Camila si tenía quién cuidara a sus hijos, ni cuántas veces había faltado en su empleo anterior. Su historial decía: cero ausencias injustificadas.</div>
     <p>La empresa contrató a Andrés. En el comunicado a Camila escribieron una frase impecable: <b>«Gracias por participar. No es el perfil que buscamos.»</b></p>
-    <p>No hubo insultos, ni una norma que dijera «no contratamos madres». La decisión parecía neutral. Pero la razón real fue una suposición sobre su vida personal, no sobre su trabajo.</p>
-    <p>Meses después, una auditoría interna encontró un patrón: en esa área, de diez personas contratadas en dos años, ocho eran hombres, y en los informes de selección se repetían frases como «disponibilidad», «compromiso» y «perfil». <b>Esa repetición fue lo que hizo visible lo invisible.</b></p>
+    <div class="secret" data-s="4"><div class="sc"><p>No hubo insultos, ni una norma que dijera «no contratamos madres». La decisión parecía neutral. Pero la razón real fue una suposición sobre su vida personal, no sobre su trabajo.</p></div></div>
+    <div class="secret" data-s="5"><div class="sc"><p>Meses después, una auditoría interna encontró un patrón: en esa área, de diez personas contratadas en dos años, ocho eran hombres, y en los informes de selección se repetían frases como «disponibilidad», «compromiso» y «perfil». <b>Esa repetición fue lo que hizo visible lo invisible.</b></p></div></div>
   </div>
-
-  <figure><span class="ph"><img src="img/caso.jpg" alt="Una mujer pensativa, dos hojas de vida con lupa y preguntas para reflexionar sobre la decisión" data-zoom></span><figcaption>¿La decisión se basa en competencias laborales?</figcaption></figure>
 
   <h3 style="margin-top:20px">Para pensar</h3>
   <ul class="clean">
@@ -205,9 +215,9 @@ figcaption{color:var(--mut);font-size:.88rem;margin-top:8px}
   <h2>🎬 Refuerza el tema con un video</h2>
   <p>Mira el video y luego responde en tu cuaderno: <b>¿qué ejemplo del video se parece al caso de Camila?</b></p>
   <div class="video">
-    <iframe src="https://www.youtube-nocookie.com/embed/YWlgnp7uV6c" title="Sesgos de género" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe src="https://www.youtube-nocookie.com/embed/Ap-B27beYrU" title="Igualdad en las empresas. Barreras y sesgos de género en el ámbito laboral" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
-  <p class="note">Video: «Sesgos de género» (canal ProComHum). Si no se carga, <a href="https://www.youtube.com/watch?v=YWlgnp7uV6c" target="_blank" rel="noopener">ábrelo en YouTube</a>.</p>
+  <p class="note">Video: «Igualdad en las empresas. Barreras y sesgos de género en el ámbito laboral» (Instituto de las Mujeres). Si no se carga, <a href="https://www.youtube.com/watch?v=Ap-B27beYrU" target="_blank" rel="noopener">ábrelo en YouTube</a>.</p>
 </section>
 
 <section id="actividades">
@@ -302,9 +312,11 @@ if(matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:re
   addEventListener('mousemove',e=>{
     mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px)`;
     for(let i=0;i<2;i++)P.push({x:mx,y:my,vx:(Math.random()-.5)*1.4,vy:(Math.random()-.5)*1.4-.3,l:1,s:2+Math.random()*3,h:Math.random()<.5?44:270});
+    $$('.secret').forEach(el=>{const r=el.getBoundingClientRect();el.style.setProperty('--x',(e.clientX-r.left)+'px');el.style.setProperty('--y',(e.clientY-r.top)+'px');
+      if(!el.classList.contains('seen')&&e.clientX>r.left&&e.clientX<r.right&&e.clientY>r.top&&e.clientY<r.bottom){el.classList.add('seen');$('#fc').textContent=$$('.secret.seen').length}});
     const t=e.target;
     lens.classList.toggle('link',!!t.closest('a,button,summary'));
-    const z=t.closest('[data-zoom]');lens.classList.toggle('zoom',!!z&&!t.closest('a,button'));
+    const z=t.closest('[data-zoom]');lens.classList.toggle('zoom',(!!z||!!t.closest('.secret'))&&!t.closest('a,button'));
     $$('[data-zoom]').forEach(im=>{if(im===t){const r=im.getBoundingClientRect();im.style.transformOrigin=`${(e.clientX-r.left)/r.width*100}% ${(e.clientY-r.top)/r.height*100}%`;im.style.transform='scale(1.7)'}else im.style.transform=''});
   });
   addEventListener('mousedown',()=>{lens.classList.add('down');for(let i=0;i<18;i++){const a=Math.random()*6.28,v=1+Math.random()*3;P.push({x:mx,y:my,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:1,s:3+Math.random()*3,h:Math.random()<.5?44:320})}});
