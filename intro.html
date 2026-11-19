@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>El Sesgo Invisible · Introducción</title>
+<style>
+:root{--pu:#4b2a7b;--pu2:#7c4dcc;--gr:#0f9d6b;--or:#f59e0b;--rd:#e53935;--bg:#120a24;--tx:#f5f0ff;--mut:#d9c9ff;--card:rgba(255,255,255,.09);--bd:rgba(255,255,255,.18)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 20% 0,#3a1d6e 0,#120a24 55%) fixed;color:var(--tx);font:18px/1.65 "Segoe UI",system-ui,sans-serif}
+a{color:#ffd37a}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+header.hero{padding:70px 0 40px;text-align:center}
+h1{font-size:clamp(2.2rem,7vw,4rem);line-height:1.05;margin:.2em 0;background:linear-gradient(90deg,#fff,#c9a8ff,#ffd37a);-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:clamp(1.5rem,4vw,2.1rem);margin:0 0 .4em;line-height:1.2}
+h3{margin:.2em 0 .3em;font-size:1.15rem}
+.lead{color:var(--mut);font-size:1.2rem;max-width:660px;margin:0 auto 1.2em}
+.btn{display:inline-block;font:inherit;font-weight:700;border:0;border-radius:999px;padding:13px 28px;color:#fff;text-decoration:none;background:linear-gradient(135deg,var(--pu2),#e0489b);box-shadow:0 8px 24px #0006;transition:transform .15s}
+.btn:hover{transform:translateY(-2px) scale(1.03)}
+.btn.ghost{background:var(--card);border:1px solid var(--bd);box-shadow:none}
+nav.toc{position:sticky;top:0;z-index:10;background:#120a24ee;backdrop-filter:blur(8px);border-bottom:1px solid var(--bd)}
+nav.toc .wrap{display:flex;gap:6px;overflow-x:auto;padding:8px 18px}
+nav.toc a{white-space:nowrap;text-decoration:none;color:var(--tx);font-size:.9rem;padding:6px 12px;border-radius:999px;background:var(--card)}
+nav.toc a:hover{background:var(--pu2)}
+section{padding:46px 0 10px}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:18px 20px;margin:14px 0}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid .panel{margin:0}
+.big{font-size:1.35rem;font-weight:700;border-left:5px solid var(--or);padding-left:14px;margin:18px 0}
+.icon{font-size:1.8rem}
+.tag{display:inline-block;font-size:.8rem;font-weight:700;background:var(--pu2);border-radius:8px;padding:2px 10px;margin-bottom:6px}
+.tag.g{background:var(--gr)}.tag.o{background:var(--or);color:#2a1700}.tag.r{background:var(--rd)}
+.say{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.say div{border-radius:14px;padding:12px 14px}
+.say .a{background:#e5393522;border:1px solid #e5393566}
+.say .b{background:#0f9d6b22;border:1px solid #0f9d6b66}
+@media(max-width:560px){.say{grid-template-columns:1fr}}
+ol.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+ol.steps li{counter-increment:s;display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--bd)}
+ol.steps li:last-child{border:0}
+ol.steps li::before{content:counter(s);flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:var(--pu2);font-weight:800;font-size:1.4rem;box-shadow:0 6px 18px #0006}
+ol.steps li:nth-child(5)::before{background:var(--gr)}
+ol.steps li:nth-child(6)::before{background:var(--or);color:#2a1700}
+ol.steps p{margin:.1em 0 0;color:var(--mut)}
+.story{background:linear-gradient(135deg,#7c4dcc33,#e0489b22);border:1px solid var(--bd);border-radius:20px;padding:22px 24px}
+.story p{margin:.7em 0}
+.story .who{color:#ffd37a;font-weight:700}
+.quote{font-style:italic;color:#fff;border-left:4px solid var(--rd);padding-left:12px;margin:12px 0}
+details{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px 16px;margin:10px 0}
+summary{cursor:pointer;font-weight:700}
+.video{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;border:1px solid var(--bd);background:#000}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+ul.clean{margin:.4em 0;padding-left:1.2em}
+ul.clean li{margin:.3em 0}
+footer{text-align:center;padding:50px 0 70px}
+small,.note{color:var(--mut);font-size:.9rem}
+/* imágenes */
+figure{margin:18px 0;text-align:center}
+figure .ph{display:inline-block;max-width:100%;border-radius:18px;overflow:hidden;border:1px solid var(--bd);box-shadow:0 12px 36px #0008;background:#fff}
+figure img{display:block;max-width:100%;height:auto;transition:transform .25s ease-out;will-change:transform}
+figcaption{color:var(--mut);font-size:.88rem;margin-top:8px}
+.heroimg{max-width:860px;margin:30px auto 0}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center}
+.split figure{margin:0}
+@media(max-width:700px){.split{grid-template-columns:1fr}}
+.float{animation:fl 5s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px)}}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s,transform .7s}
+.rv.in{opacity:1;transform:none}
+/* música */
+#mus{position:fixed;right:14px;bottom:14px;z-index:90;font:inherit;font-weight:700;border:1px solid var(--bd);border-radius:999px;padding:10px 18px;color:#fff;background:#2a1650ee;cursor:pointer;backdrop-filter:blur(6px)}
+#mus.on{background:linear-gradient(135deg,var(--gr),#35c98d)}
+/* cursor: lente luminosa con estela */
+@media (pointer:fine){
+  html.cur,html.cur *{cursor:none!important}
+  #trail{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9998}
+  #lens,#dot{position:fixed;left:0;top:0;pointer-events:none;z-index:9999;border-radius:50%;will-change:transform}
+  #lens{width:46px;height:46px;margin:-23px 0 0 -23px;border:2px solid #ffd37a;box-shadow:0 0 18px #ffd37a99,inset 0 0 14px #7c4dcc88;background:radial-gradient(circle at 35% 30%,#ffffff40,transparent 60%);backdrop-filter:blur(.5px) saturate(1.4);transition:width .25s,height .25s,margin .25s,border-color .25s,background .25s}
+  #lens::after{content:"";position:absolute;right:-9px;bottom:-9px;width:6px;height:18px;border-radius:4px;background:#ffd37a;transform:rotate(-45deg);transform-origin:top;opacity:.9;transition:opacity .2s}
+  #dot{width:8px;height:8px;margin:-4px 0 0 -4px;background:#fff;box-shadow:0 0 10px #fff}
+  #lens.link{width:70px;height:70px;margin:-35px 0 0 -35px;border-color:#35c98d;background:radial-gradient(circle,#35c98d55,transparent 70%)}
+  #lens.link::after{opacity:0}
+  #lens.zoom{width:92px;height:92px;margin:-46px 0 0 -46px;border-color:#fff}
+  #lens.down{border-color:#e0489b;box-shadow:0 0 28px #e0489b}
+}
+@media (pointer:coarse),(prefers-reduced-motion:reduce){#trail,#lens,#dot{display:none}}
+@media (prefers-reduced-motion:reduce){.float{animation:none}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="icon">⚖️</div>
+    <h1>El Sesgo Invisible</h1>
+    <p class="lead">Las decisiones laborales que parecen neutrales, pero esconden prejuicios. Aquí aprendes qué son, cómo reconocerlos y qué hacer, antes de empezar las actividades.</p>
+    <a class="btn" href="#actividades">Ver qué vas a hacer</a>
+    <a class="btn ghost" href="index.html">▶ Ir directo a las actividades</a>
+    <figure class="heroimg float"><span class="ph"><img src="img/hero.jpg" alt="Una balanza con símbolos de mujer y hombre, dos profesionales, monedas apiladas a distinta altura y una mujer haciendo gesto de alto" data-zoom></span></figure>
+  </div>
+</header>
+
+<nav class="toc"><div class="wrap">
+  <a href="#que-es">¿Qué es?</a>
+  <a href="#como">Cómo funciona</a>
+  <a href="#donde">Dónde aparece</a>
+  <a href="#principio">El principio</a>
+  <a href="#relato">Relato de un caso</a>
+  <a href="#video">Video</a>
+  <a href="#actividades">Actividades</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="que-es">
+  <h2>🌊 ¿Qué es el sesgo invisible?</h2>
+  <p>Son <b>prejuicios y estereotipos que casi nunca se dicen en voz alta</b>, pero que influyen en decisiones laborales: a quién se contrata, cuánto se le paga, a quién se evalúa mejor, capacita o asciende.</p>
+  <p>Se llama <b>invisible</b> porque la decisión <i>parece neutral</i> y suele justificarse con frases que suenan razonables, aunque debajo haya una idea como «tendrá hijos» o «es muy joven».</p>
+  <div class="split">
+    <div class="big" style="margin:0">Es como un iceberg: la decisión se ve arriba; el prejuicio que la motivó queda bajo el agua.</div>
+    <figure><span class="ph"><img src="img/lupa.jpg" alt="Una lupa que destaca a una mujer entre un grupo de profesionales" data-zoom></span><figcaption>La lupa sirve para mirar quién es descartado y por qué.</figcaption></figure>
+  </div>
+  <div class="say">
+    <div class="a"><span class="tag r">Lo que se dice</span><br>«No es el perfil que buscamos.»<br>«Preferimos a alguien con más disponibilidad.»</div>
+    <div class="b"><span class="tag g">Lo que puede haber debajo</span><br>«Es mujer y tal vez tenga hijos.»<br>«Es muy joven / muy mayor para este cargo.»</div>
+  </div>
+  <p class="note">Importante: el sesgo no siempre es mala intención. Muchas veces la persona que decide ni siquiera es consciente de que lo hace; por eso hay que aprender a detectarlo.</p>
+</section>
+
+<section id="como">
+  <h2>🔍 ¿Cómo funciona?</h2>
+  <p>El sesgo invisible actúa cuando una <b>característica personal</b> pesa más que las <b>competencias reales</b> para el cargo.</p>
+  <div class="grid">
+    <div class="panel"><span class="tag">1 · Estereotipo</span><p>Una idea generalizada sobre un grupo: «las madres faltan más», «los jóvenes no son responsables».</p></div>
+    <div class="panel"><span class="tag o">2 · Atajo mental</span><p>Se aplica la idea a una persona concreta sin comprobar si es cierta para ella.</p></div>
+    <div class="panel"><span class="tag r">3 · Decisión</span><p>Se descarta, se paga menos o no se asciende, y se justifica con un motivo «técnico».</p></div>
+  </div>
+  <div class="split">
+    <p>El resultado es una <b>brecha</b>: personas con el mismo valor de trabajo reciben condiciones distintas. Mira las monedas: el trabajo es el mismo, el pago no.</p>
+    <figure><span class="ph"><img src="img/monedas.jpg" alt="Dos pilas de monedas de distinta altura con los símbolos de mujer y hombre" data-zoom></span><figcaption>La brecha salarial, hecha visible.</figcaption></figure>
+  </div>
+</section>
+
+<section id="donde">
+  <h2>📍 ¿Dónde puede aparecer?</h2>
+  <p>En cualquier momento de la vida laboral:</p>
+  <div class="grid">
+    <div class="panel"><h3>🧾 Selección</h3><p>Descartar hojas de vida por el nombre, la edad, la foto o el estado civil. Preguntar en entrevista por planes de embarazo.</p></div>
+    <div class="panel"><h3>💰 Salario</h3><p>Ofrecer menos a quien «no es cabeza de hogar» o «tiene quien la mantenga» pese a hacer el mismo trabajo.</p></div>
+    <div class="panel"><h3>⭐ Evaluación</h3><p>Valorar distinto el mismo desempeño según quién lo realiza.</p></div>
+    <div class="panel"><h3>🎓 Capacitación</h3><p>No invitar a formaciones a quien «se va a ausentar» o «pronto se jubila».</p></div>
+    <div class="panel"><h3>📈 Ascensos</h3><p>Asumir que alguien «no aceptará el cargo» sin preguntarle.</p></div>
+    <div class="panel"><h3>🧩 Características</h3><p>Género, maternidad, edad, apariencia, estado civil, origen: ninguna debería definir el valor de una persona trabajadora.</p></div>
+  </div>
+  <figure><span class="ph"><img src="img/filas.jpg" alt="Una lupa sobre figuras en bloques de madera, entre las que se elige una" data-zoom></span><figcaption>Quien selecciona puede, sin notarlo, filtrar por características y no por capacidades.</figcaption></figure>
+</section>
+
+<section id="principio">
+  <h2>🎯 El principio que lo contrarresta</h2>
+  <div class="big">A trabajo de igual valor, condiciones justas.</div>
+  <p>Significa que contratación, pago y ascenso deben basarse en lo que sí importa para el cargo: <b>formación, experiencia, competencias y resultados</b>. No en quién es la persona fuera del trabajo.</p>
+  <figure><span class="ph"><img src="img/grupo.jpg" alt="Grupo diverso de personas trabajadoras de distintos oficios y edades" data-zoom></span><figcaption>Personas distintas, un mismo criterio: lo que saben y lo que hacen.</figcaption></figure>
+  <div class="grid">
+    <div class="panel"><span class="tag g">✅ Sí se valora</span><ul class="clean"><li>Formación y experiencia</li><li>Competencias y habilidades</li><li>Resultados y desempeño</li><li>Requisitos del cargo</li></ul></div>
+    <div class="panel"><span class="tag r">🚫 No debe valorarse</span><ul class="clean"><li>Género o maternidad</li><li>Edad o apariencia</li><li>Estado civil</li><li>Origen</li></ul></div>
+  </div>
+  <p class="note">Marco de referencia: el Convenio 100 de la OIT (igual remuneración por trabajo de igual valor) y, en Colombia, la Constitución (art. 13, igualdad) y la Ley 1496 de 2011 sobre igualdad salarial entre mujeres y hombres. Tu docente puede ampliar este punto.</p>
+</section>
+
+<section id="relato">
+  <h2>📖 Relato de un caso</h2>
+  <p class="note">Caso ilustrativo, construido para esta actividad. Los nombres son ficticios, pero la situación es muy común.</p>
+  <div class="story">
+    <p><span class="who">Camila</span> y <span class="who">Andrés</span> se postularon al mismo cargo administrativo en una empresa mediana. Los dos son profesionales, con cinco años de experiencia y buenos resultados en las pruebas técnicas. En el papel, el empate era casi perfecto.</p>
+    <p>Después de las entrevistas, el jefe de selección escribió en su informe: <i>«Ambos cumplen. Pero Camila tiene dos hijos pequeños; seguramente se ausentará con frecuencia. Andrés ofrece más disponibilidad.»</i></p>
+    <div class="quote">Nadie le preguntó a Camila si tenía quién cuidara a sus hijos, ni cuántas veces había faltado en su empleo anterior. Su historial decía: cero ausencias injustificadas.</div>
+    <p>La empresa contrató a Andrés. En el comunicado a Camila escribieron una frase impecable: <b>«Gracias por participar. No es el perfil que buscamos.»</b></p>
+    <p>No hubo insultos, ni una norma que dijera «no contratamos madres». La decisión parecía neutral. Pero la razón real fue una suposición sobre su vida personal, no sobre su trabajo.</p>
+    <p>Meses después, una auditoría interna encontró un patrón: en esa área, de diez personas contratadas en dos años, ocho eran hombres, y en los informes de selección se repetían frases como «disponibilidad», «compromiso» y «perfil». <b>Esa repetición fue lo que hizo visible lo invisible.</b></p>
+  </div>
+
+  <figure><span class="ph"><img src="img/caso.jpg" alt="Una mujer pensativa, dos hojas de vida con lupa y preguntas para reflexionar sobre la decisión" data-zoom></span><figcaption>¿La decisión se basa en competencias laborales?</figcaption></figure>
+
+  <h3 style="margin-top:20px">Para pensar</h3>
+  <ul class="clean">
+    <li>¿Qué criterio laboral real se usó para elegir a Andrés? ¿Qué criterio personal se usó para descartar a Camila?</li>
+    <li>¿Qué pregunta o práctica habría evitado el sesgo?</li>
+    <li>¿Por qué fue tan difícil detectarlo en un solo caso y tan evidente al ver el conjunto?</li>
+  </ul>
+  <details>
+    <summary>Ver el análisis</summary>
+    <p>La decisión usó una condición personal y familiar (la maternidad) como criterio de selección, en lugar de valorar competencias, experiencia y requisitos del cargo. Podría constituir un acto discriminatorio. Se habría evitado con criterios definidos de antemano, las mismas preguntas para todas las personas candidatas y la revisión del proceso por una segunda persona.</p>
+  </details>
+
+  <div class="panel" style="margin-top:18px">
+    <span class="tag o">Un caso real</span>
+    <h3>La audición con pantalla</h3>
+    <p>Hasta los años setenta, las grandes orquestas de Estados Unidos tenían muy pocas mujeres. Algunas empezaron a hacer audiciones «a ciegas», con una pantalla que ocultaba a quien tocaba. Un estudio de los economistas Claudia Goldin y Cecilia Rouse encontró que la pantalla <b>aumentó la probabilidad de que las mujeres avanzaran</b> en las rondas preliminares. Cuando el juez dejó de ver quién tocaba, empezó a evaluar solo cómo tocaba.</p>
+    <p class="note">Fuente: Goldin y Rouse (2000), «Orchestrating Impartiality», American Economic Review. Los efectos exactos varían según la ronda y siguen en discusión académica.</p>
+  </div>
+</section>
+
+<section id="video">
+  <h2>🎬 Refuerza el tema con un video</h2>
+  <p>Mira el video y luego responde en tu cuaderno: <b>¿qué ejemplo del video se parece al caso de Camila?</b></p>
+  <div class="video">
+    <iframe src="https://www.youtube-nocookie.com/embed/YWlgnp7uV6c" title="Sesgos de género" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+  <p class="note">Video: «Sesgos de género» (canal ProComHum). Si no se carga, <a href="https://www.youtube.com/watch?v=YWlgnp7uV6c" target="_blank" rel="noopener">ábrelo en YouTube</a>.</p>
+</section>
+
+<section id="actividades">
+  <h2>🧭 Las actividades: qué vas a hacer</h2>
+  <p>La presentación interactiva tiene seis actividades cortas. Avanzas con los puntos de abajo o con los botones, y acumulas puntaje.</p>
+  <div class="panel">
+  <ol class="steps">
+    <li><div><b>¿Qué es?</b><p>Pasa la lupa sobre cada persona y haz clic para descartar la característica que no debería importar.</p></div></li>
+    <li><div><b>¿Dónde puede aparecer?</b><p>Toca cada tarjeta para descubrir un ejemplo. Debes descubrir las cinco.</p></div></li>
+    <li><div><b>¿Qué debe valorarse?</b><p>Arrastra cada tarjeta a «Sí se valora» o «No debe valorarse».</p></div></li>
+    <li><div><b>Identifica el sesgo</b><p>Lee cinco situaciones y clasifícalas: no es criterio laboral, es discriminación o sí es pertinente.</p></div></li>
+    <li><div><b>¿Qué puedes hacer?</b><p>Cada acción que marcas acerca la balanza al equilibrio y reduce la brecha.</p></div></li>
+    <li><div><b>Pon a prueba tu criterio</b><p>Analiza un caso final y decide si la decisión fue justa. Al terminar ves una respuesta fundamentada.</p></div></li>
+  </ol>
+  </div>
+  <div class="grid" style="margin-top:14px">
+    <div class="panel"><h3>💡 Consejos</h3><ul class="clean"><li>Lee el caso de Camila antes de empezar.</li><li>En cada actividad, pregúntate: ¿esto tiene que ver con el trabajo?</li><li>Puedes reiniciar y repetir.</li></ul></div>
+    <div class="panel"><h3>🎯 Al terminar podrás</h3><ul class="clean"><li>Explicar qué es el sesgo invisible.</li><li>Distinguir un criterio laboral de uno discriminatorio.</li><li>Proponer acciones para corregirlo.</li></ul></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a class="btn" href="index.html">▶ Comenzar las actividades</a>
+  <p class="note" style="margin-top:18px">A trabajo de igual valor, condiciones justas.</p>
+</footer>
+
+<button id="mus" aria-pressed="false">🔇 Música</button>
+<canvas id="trail"></canvas><div id="lens"></div><div id="dot"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+/* ===== Música ambiental generativa (sin archivos): pads suaves + notas de piano espaciadas + reverberación ===== */
+let AC,master,bus,musicOn=false,timer,step=0;
+const N=m=>440*Math.pow(2,(m-69)/12);
+/* Cmaj9 · Am9 · Fmaj7 · G6, cada acorde dura 8 s */
+const PROG=[[48,55,59,62,64],[45,55,59,60,64],[41,57,60,64,67],[43,59,62,64,69]];
+const PENTA=[72,74,76,79,81,84];
+function initAudio(){
+  AC=new (window.AudioContext||window.webkitAudioContext)();
+  master=AC.createGain();master.gain.value=0;
+  const comp=AC.createDynamicsCompressor();master.connect(comp);comp.connect(AC.destination);
+  bus=AC.createBiquadFilter();bus.type='lowpass';bus.frequency.value=1700;bus.Q.value=.3;
+  const dry=AC.createGain();dry.gain.value=.75;bus.connect(dry);dry.connect(master);
+  /* reverberación sintética: ruido que decae durante 4 s */
+  const len=AC.sampleRate*4,ir=AC.createBuffer(2,len,AC.sampleRate);
+  for(let c=0;c<2;c++){const d=ir.getChannelData(c);for(let k=0;k<len;k++)d[k]=(Math.random()*2-1)*Math.pow(1-k/len,3)}
+  const rv=AC.createConvolver();rv.buffer=ir;const wet=AC.createGain();wet.gain.value=.55;bus.connect(rv);rv.connect(wet);wet.connect(master);
+}
+/* nota suave: ataque y caída largos */
+function voice(f,t,dur,vol,att,type='sine',detune=0){
+  const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;o.detune.value=detune;
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+att);g.gain.setTargetAtTime(0,t+dur,dur*.35);
+  o.connect(g);g.connect(bus);o.start(t);o.stop(t+dur*2.6);
+}
+function bar(){
+  const t=AC.currentTime+.05,c=PROG[step%4];
+  /* pad: cada nota con dos voces ligeramente desafinadas */
+  c.forEach(m=>{voice(N(m),t,7,.045,2.8,'triangle',-6);voice(N(m),t,7,.045,2.8,'sine',6)});
+  voice(N(c[0]-12),t,7.5,.09,2.2);                       /* bajo profundo */
+  /* melodía de piano esparcida: pocas notas, pentatónica, sin patrón fijo */
+  let at=1.2+Math.random()*1.2;
+  while(at<7.2){
+    const m=PENTA[Math.floor(Math.random()*PENTA.length)];
+    voice(N(m),t+at,2.6,.05,.02);voice(N(m)*2,t+at,1.2,.012,.02);
+    at+=1.6+Math.random()*2.2;
+  }
+  step++;
+}
+function setMusic(on){
+  if(!AC)initAudio();
+  musicOn=on;AC.resume();master.gain.cancelScheduledValues(AC.currentTime);master.gain.linearRampToValueAtTime(on?.55:0,AC.currentTime+(on?3:1));
+  clearInterval(timer);if(on){bar();timer=setInterval(bar,8000)}
+  const b=$('#mus');b.textContent=on?'🔊 Música':'🔇 Música';b.classList.toggle('on',on);b.setAttribute('aria-pressed',on);
+  try{sessionStorage.setItem('musica',on?'1':'0')}catch(e){}
+}
+$('#mus').onclick=()=>setMusic(!musicOn);
+/* el navegador bloquea el audio hasta el primer gesto: si la persona ya había activado la música, se reanuda al primer toque */
+try{if(sessionStorage.getItem('musica')==='1')addEventListener('pointerdown',()=>{if(!musicOn)setMusic(true)},{once:true})}catch(e){}
+
+/* ===== Aparición suave al desplazarse ===== */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+$$('section>*, figure').forEach(el=>{el.classList.add('rv');io.observe(el)});
+
+/* ===== Cursor: lente con estela de destellos + zoom sobre imágenes ===== */
+if(matchMedia('(pointer:fine)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  document.documentElement.classList.add('cur');
+  const lens=$('#lens'),dot=$('#dot'),cv=$('#trail'),cx=cv.getContext('2d');
+  let W,H,mx=-100,my=-100,lx=-100,ly=-100;const P=[];
+  const fit=()=>{W=cv.width=innerWidth;H=cv.height=innerHeight};fit();addEventListener('resize',fit);
+  addEventListener('mousemove',e=>{
+    mx=e.clientX;my=e.clientY;dot.style.transform=`translate(${mx}px,${my}px)`;
+    for(let i=0;i<2;i++)P.push({x:mx,y:my,vx:(Math.random()-.5)*1.4,vy:(Math.random()-.5)*1.4-.3,l:1,s:2+Math.random()*3,h:Math.random()<.5?44:270});
+    const t=e.target;
+    lens.classList.toggle('link',!!t.closest('a,button,summary'));
+    const z=t.closest('[data-zoom]');lens.classList.toggle('zoom',!!z&&!t.closest('a,button'));
+    $$('[data-zoom]').forEach(im=>{if(im===t){const r=im.getBoundingClientRect();im.style.transformOrigin=`${(e.clientX-r.left)/r.width*100}% ${(e.clientY-r.top)/r.height*100}%`;im.style.transform='scale(1.7)'}else im.style.transform=''});
+  });
+  addEventListener('mousedown',()=>{lens.classList.add('down');for(let i=0;i<18;i++){const a=Math.random()*6.28,v=1+Math.random()*3;P.push({x:mx,y:my,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:1,s:3+Math.random()*3,h:Math.random()<.5?44:320})}});
+  addEventListener('mouseup',()=>lens.classList.remove('down'));
+  document.addEventListener('mouseleave',()=>{mx=my=-100});
+  (function loop(){
+    lx+=(mx-lx)*.18;ly+=(my-ly)*.18;lens.style.transform=`translate(${lx}px,${ly}px)`;
+    cx.clearRect(0,0,W,H);
+    for(let i=P.length-1;i>=0;i--){const p=P[i];p.x+=p.vx;p.y+=p.vy;p.l-=.03;
+      if(p.l<=0){P.splice(i,1);continue}
+      cx.globalAlpha=p.l;cx.fillStyle=`hsl(${p.h} 100% 70%)`;cx.shadowColor=`hsl(${p.h} 100% 60%)`;cx.shadowBlur=10;
+      cx.beginPath();cx.arc(p.x,p.y,p.s*p.l,0,6.28);cx.fill()}
+    requestAnimationFrame(loop)})();
+}
+</script>
+</body>
+</html>
